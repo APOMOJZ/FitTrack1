@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Good Morning, User" />
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Calorie Summary Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <com.example.fittrack.ui.CircularProgressView
+                        android:id="@+id/calorieProgress"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/llCalorieText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@id/calorieProgress"
+                        app:layout_constraintEnd_toEndOf="@id/calorieProgress"
+                        app:layout_constraintStart_toStartOf="@id/calorieProgress"
+                        app:layout_constraintTop_toTopOf="@id/calorieProgress">
+
+                        <TextView
+                            android:id="@+id/tvRemainingCalories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            tools:text="2,000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/calories_remaining"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/calorieProgress">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:id="@+id/tvGoalValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textStyle="bold" tools:text="2,000" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/goal" android:textColor="@color/text_secondary" android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:id="@+id/tvFoodValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textStyle="bold" tools:text="0" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/food" android:textColor="@color/text_secondary" android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:id="@+id/tvExerciseValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textStyle="bold" tools:text="0" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/exercise" android:textColor="@color/text_secondary" android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Macros Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/carbs" android:textColor="@color/text_primary" />
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/carbsProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:progress="0"
+                        app:indicatorColor="@color/carbs"
+                        app:trackColor="#E0E0E0" />
+                    <TextView android:id="@+id/tvCarbsText" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="0g / 200g" android:textSize="12sp" android:textColor="@color/text_secondary" />
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/protein" android:textColor="@color/text_primary" />
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/proteinProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:progress="0"
+                        app:indicatorColor="@color/protein"
+                        app:trackColor="#E0E0E0" />
+                    <TextView android:id="@+id/tvProteinText" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="0g / 150g" android:textSize="12sp" android:textColor="@color/text_secondary" />
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/fat" android:textColor="@color/text_primary" />
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/fatProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:progress="0"
+                        app:indicatorColor="@color/fat"
+                        app:trackColor="#E0E0E0" />
+                    <TextView android:id="@+id/tvFatText" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="0g / 70g" android:textSize="12sp" android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Steps Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivSteps"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_progress"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/tvStepsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@string/steps"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/ivSteps"
+                        app:layout_constraintStart_toEndOf="@id/ivSteps"
+                        app:layout_constraintTop_toTopOf="@id/ivSteps" />
+
+                    <TextView
+                        android:id="@+id/tvStepCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="0" />
+
+                    <TextView
+                        android:id="@+id/tvStepGoal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/steps_goal"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvStepCount" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/stepsProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:progress="0"
+                        app:indicatorColor="@color/primary"
+                        app:layout_constraintTop_toBottomOf="@id/tvStepGoal"
+                        app:trackColor="#E0E0E0" />
+
+                    <TextView
+                        android:id="@+id/tvCaloriesBurned"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/stepsProgress"
+                        tools:text="0 kcal burned" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Meals Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="Meals"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <include layout="@layout/item_meal_card" android:id="@+id/cardBreakfast" />
+            <include layout="@layout/item_meal_card" android:id="@+id/cardLunch" />
+            <include layout="@layout/item_meal_card" android:id="@+id/cardDinner" />
+            <include layout="@layout/item_meal_card" android:id="@+id/cardSnacks" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvFoodNameDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oatmeal"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBrandDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quaker"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFoodNameDetail" />
+
+    <LinearLayout
+        android:id="@+id/llSelectors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvBrandDetail">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:hint="Serving Size">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1 cup (40g)" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:hint="Number of Servings">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="1.0" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNutritionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Nutrition Facts"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llSelectors" />
+
+    <!-- Nutrition Table -->
+    <TableLayout
+        android:id="@+id/tableNutrition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNutritionTitle">
+
+        <TableRow android:paddingVertical="8dp">
+            <TextView android:text="Calories" android:layout_weight="1" />
+            <TextView android:text="150 kcal" android:textStyle="bold" />
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE" />
+        <TableRow android:paddingVertical="8dp">
+            <TextView android:text="Total Fat" android:layout_weight="1" />
+            <TextView android:text="3g" android:textStyle="bold" />
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE" />
+        <TableRow android:paddingVertical="8dp">
+            <TextView android:text="Total Carbs" android:layout_weight="1" />
+            <TextView android:text="27g" android:textStyle="bold" />
+        </TableRow>
+        <View android:layout_height="1dp" android:background="#EEEEEE" />
+        <TableRow android:paddingVertical="8dp">
+            <TextView android:text="Protein" android:layout_weight="1" />
+            <TextView android:text="5g" android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:checkedButton="@+id/btnBreakfast"
+        app:layout_constraintTop_toBottomOf="@id/tableNutrition">
+        <Button
+            android:id="@+id/btnBreakfast"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="B"
+            android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnLunch"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="L"
+            android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnDinner"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="D"
+            android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnSnacks"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="S"
+            android:textSize="12sp" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Add to Diary"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintTop_toBottomOf="@id/toggleMeal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
