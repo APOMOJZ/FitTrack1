@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fittrack.databinding.ActivityProfileBinding
+import java.util.Locale
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
@@ -28,15 +29,18 @@ class ProfileActivity : AppCompatActivity() {
         val age = sharedPref.getInt("user_age", 0)
         val weight = sharedPref.getFloat("user_weight", 0f)
         val height = sharedPref.getFloat("user_height", 0f)
+        val calorieGoal = sharedPref.getInt("calorie_goal", 2000)
+        val proteinGoal = sharedPref.getInt("protein_goal", 150)
+        val goalType = sharedPref.getString("user_goal", "Maintain Weight")
 
         binding.tvUserName.text = name
         binding.tvUserAge.text = age.toString()
-        binding.tvUserWeight.text = String.format("%.1f kg", weight)
-        binding.tvUserHeight.text = String.format("%.1f cm", height)
+        binding.tvUserWeight.text = String.format(Locale.getDefault(), "%.1f kg", weight)
+        binding.tvUserHeight.text = String.format(Locale.getDefault(), "%.1f cm", height)
         
-        // Calculate calorie goal for display here too
-        val calorieGoal = ((10 * weight) + (6.25 * height) - (5 * age) + 5).toInt()
-        binding.tvCalorieGoal.text = String.format("%,d kcal", if (calorieGoal > 1200) calorieGoal else 1200)
+        binding.tvCalorieGoal.text = String.format(Locale.getDefault(), "%,d kcal", calorieGoal)
+        binding.tvProteinGoal.text = String.format(Locale.getDefault(), "%dg", proteinGoal)
+        binding.tvGoalType.text = goalType
     }
 
     private fun logout() {

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.fittrack"
-        minSdk = 26 // Health Connect requires API 26+
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -47,9 +47,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     
-    // Google Play Services
-    implementation(libs.play.services.auth)
-    implementation(libs.play.services.fitness)
+    // Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
     
     // Health Connect
     implementation("androidx.health.connect:connect-client:1.1.0-alpha11")

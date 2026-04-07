@@ -33,21 +33,16 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Profile Header -->
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ivAvatar"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:padding="2dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-                    app:strokeColor="?attr/colorPrimary"
-                    app:strokeWidth="2dp" />
-            </FrameLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:padding="2dp"
+                android:src="@android:drawable/ic_menu_gallery"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="2dp" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -59,7 +54,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <!-- Stats Row -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +81,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Goals Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,9 +93,24 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
-                    <TextView android:text="Your Daily Goal" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8dp"/>
-                    <TextView android:id="@+id/tvCalorieGoal" android:text="2,000 kcal" android:textSize="24sp" android:textStyle="bold" android:textColor="?attr/colorPrimary" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                    <TextView android:text="Based on your profile data" android:textSize="12sp" android:textColor="#666666" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <TextView android:text="Daily Goals" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="12dp"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp">
+                        <TextView android:text="Calories" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:id="@+id/tvCalorieGoal" android:text="2,000 kcal" android:textStyle="bold" android:textColor="?attr/colorPrimary" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp">
+                        <TextView android:text="Protein" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:id="@+id/tvProteinGoal" android:text="150g" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginVertical="8dp"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <TextView android:text="Goal Type" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:id="@+id/tvGoalType" android:text="Maintain Weight" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

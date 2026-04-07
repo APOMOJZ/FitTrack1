@@ -1,11 +1,13 @@
 package com.example.fittrack
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fittrack.adapter.FoodAdapter
+import com.example.fittrack.api.OpenFoodService
 import com.example.fittrack.databinding.ActivityFoodSearchBinding
 import com.example.fittrack.databinding.BottomSheetFoodDetailBinding
 import com.example.fittrack.model.AppDatabase
@@ -16,11 +18,20 @@ import com.example.fittrack.model.DiaryEntryEntity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Date
 
 class FoodSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFoodSearchBinding
     private lateinit var db: AppDatabase
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("https://world.openfoodfacts.org/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val openFoodService = retrofit.create(OpenFoodService::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +58,7 @@ class FoodSearchActivity : AppCompatActivity() {
 
     private fun updateList(foods: List<FoodEntity>) {
         val displayFoods = foods.map { 
-            FoodEntry(it.id.toString(), it.name, it.brand, it.calories, it.carbs, it.protein, it.fat, it.servingSize, MealType.BREAKFAST, Date())
+            FoodEntry(it.id.toString(), it.name, it.brand ?: "Generic", it.calories, it.carbs, it.protein, it.fat, it.servingSize, MealType.BREAKFAST, Date())
         }
         binding.rvSearchResults.adapter = FoodAdapter(displayFoods) { food ->
             showFoodDetail(food)
@@ -97,7 +108,11 @@ class FoodSearchActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                searchFoods(newText)
+                if (newText.isNullOrBlank()) {
+                    loadAllFoods()
+                } else if (newText.length > 2) {
+                    searchFoods(newText)
+                }
                 return true
             }
         })
@@ -105,12 +120,32 @@ class FoodSearchActivity : AppCompatActivity() {
 
     private fun searchFoods(query: String?) {
         lifecycleScope.launch {
-            val results = if (query.isNullOrBlank()) {
-                db.foodDao().getAllFoods()
-            } else {
-                db.foodDao().searchFoods("%$query%")
+            try {
+                val response = openFoodService.searchFood(query ?: "")
+                val onlineResults = response.products.map { product ->
+                    val kCal = product.nutriments?.energy_100g?.let { (it * 0.239).toInt() } ?: 0
+                    FoodEntity(
+                        name = product.product_name ?: "Unknown Product",
+                        brand = product.brands ?: "Generic",
+                        calories = kCal,
+                        carbs = product.nutriments?.carbohydrates_100g?.toInt() ?: 0,
+                        protein = product.nutriments?.proteins_100g?.toInt() ?: 0,
+                        fat = product.nutriments?.fat_100g?.toInt() ?: 0,
+                        servingSize = product.serving_size ?: "100g"
+                    )
+                }.filter { it.name != "Unknown Product" }
+                
+                if (onlineResults.isNotEmpty()) {
+                    updateList(onlineResults)
+                } else {
+                    val localResults = db.foodDao().searchFoods("%$query%")
+                    updateList(localResults)
+                }
+            } catch (e: Exception) {
+                Log.e("FoodSearch", "API Error", e)
+                val results = db.foodDao().searchFoods("%$query%")
+                updateList(results)
             }
-            updateList(results)
         }
     }
 }

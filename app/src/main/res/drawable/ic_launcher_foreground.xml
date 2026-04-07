@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <group
+        android:translateX="10"
+        android:translateY="10">
+
+        <!-- Stylized Runner and Graph integration -->
+        <path
+            android:pathData="M20,55 L32,55 L38,42 C40,42 42,68 48,68 C54,68 52,50 56,50 C60,50 62,65 68,78 L80,55 L88,42 L82,40 L88,42 L92,48"
+            android:strokeWidth="6"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round">
+            <aapt:attr name="android:strokeColor">
+                <gradient
+                    android:startX="20"
+                    android:startY="40"
+                    android:endX="92"
+                    android:endY="70"
+                    android:type="linear">
+                    <item android:offset="0" android:color="#00A99D" /> <!-- Teal -->
+                    <item android:offset="1" android:color="#2E3192" /> <!-- Deep Blue -->
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Runner Body -->
+        <path
+            android:pathData="M58,28c0,2.5 -2,4.5 -4.5,4.5s-4.5,-2 -4.5,-4.5s2,-4.5 4.5,-4.5s4.5,2 4.5,4.5z M66,38l-6,-3c-1.5,-0.7 -3.5,-0.3 -4.5,1.2l-4,6c-0.5,0.8 -0.8,1.8 -0.8,2.8v12h5v-10l4,-6l4.5,9c0.6,1.2 1.8,2 3.2,2h6v-5h-4.5L66,38z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="40"
+                    android:startY="20"
+                    android:endX="70"
+                    android:endY="60"
+                    android:type="linear">
+                    <item android:offset="0" android:color="#00A99D" />
+                    <item android:offset="1" android:color="#2E3192" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Heart integrated into the center -->
+        <path
+            android:pathData="M54,65 C52,63 48,59 48,55 C48,52 51,50 54,53 C57,50 60,52 60,55 C60,59 56,63 54,65 Z"
+            android:fillColor="#FFFFFF" />
+
+        <!-- Upward Arrow Tip -->
+        <path
+            android:pathData="M88,42 L80,45 L85,40 Z"
+            android:fillColor="#2E3192" />
+
+    </group>
+</vector>
